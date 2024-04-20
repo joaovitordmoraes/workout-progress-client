@@ -1,9 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import './globals.css'
 import NextAuthSessionProvider from '@/app/provider/sessionProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: '400',
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,8 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+      <body className={roboto.className}>
+        <NextAuthSessionProvider>
+          <div className="antialiased">{children}</div>
+        </NextAuthSessionProvider>
       </body>
     </html>
   )
