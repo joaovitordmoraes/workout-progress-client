@@ -20,7 +20,7 @@ export function MainNavigation() {
         title="Treinos"
         link="/routines"
         icon={Dumbbell}
-        state={pageName === 'routines' ? 'selected' : 'default'}
+        state={pageName.includes('routines') ? 'selected' : 'default'}
       />
       <NavItem
         title="Usuário"
