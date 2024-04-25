@@ -18,9 +18,11 @@ export default async function AuthenticatedLayout({
   }
 
   return (
-    <div className="grid min-h-screen grid-cols-dashboard">
+    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-dashboard">
       <SidebarSection />
-      <main className="w-screen lg:col-start-2 lg:w-full">{children}</main>
+      <main className="w-full lg:col-start-2 lg:w-full mt-20 lg:mt-0">
+        {children}
+      </main>
     </div>
   )
 }
