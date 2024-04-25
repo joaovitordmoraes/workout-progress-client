@@ -32,8 +32,8 @@ export function NewRoutineSection() {
       )
 
       if (createTrainingRoutineRequest.success) {
-        console.log('Rotina de treino criada com sucesso')
         setUpdateRoutines(false)
+        createRoutineForm.reset()
       }
     } catch (error) {
       console.log(error)
