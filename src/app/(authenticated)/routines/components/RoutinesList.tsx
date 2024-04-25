@@ -2,7 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { getAllTrainingRoutines } from '@/app/services/training-routine/client'
+import {
+  deleteRoutine,
+  getAllTrainingRoutines,
+} from '@/app/services/training-routine/client'
 import { useRoutines } from '@/app/store'
 
 import { EmptyState } from '@/app/components/EmptyState'
@@ -23,17 +26,18 @@ type RoutineProps = {
 }
 
 export function RoutinesList() {
-  const { updateRoutines, setuUpdateRoutines } = useRoutines((store) => {
+  const { updateRoutines, setUpdateRoutines } = useRoutines((store) => {
     return {
       updateRoutines: store.updateRoutines,
-      setuUpdateRoutines: store.setUpdateRoutines,
+      setUpdateRoutines: store.setUpdateRoutines,
     }
   })
   const [routines, setRoutines] = useState<RoutineProps[]>()
+  const [refreshRoutines, setRefreshRoutines] = useState(false)
   const router = useRouter()
 
   const showModal = () => {
-    setuUpdateRoutines(true)
+    setUpdateRoutines(true)
   }
 
   useEffect(() => {
@@ -47,7 +51,19 @@ export function RoutinesList() {
     if (updateRoutines) {
       loadRoutines()
     }
-  }, [updateRoutines])
+  }, [updateRoutines, refreshRoutines])
+
+  const routineDelete = async (id: string) => {
+    try {
+      const deletion = await deleteRoutine(id)
+
+      if (deletion.success) {
+        setRefreshRoutines(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -60,6 +76,7 @@ export function RoutinesList() {
               name={item.name}
               trainings={item.trainings.length}
               onClick={() => router.replace(`/routines/${item.id}`)}
+              onRemove={() => routineDelete(item.id)}
             />
           ))}
         </section>

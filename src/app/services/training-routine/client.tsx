@@ -44,3 +44,20 @@ export async function getAllTrainingRoutines() {
 
   return response
 }
+
+export async function deleteRoutine(id: string) {
+  const session = await getSession()
+
+  const data = await api({
+    path: `/routine/${id}`,
+    init: {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${session?.user}`,
+      },
+    },
+  })
+
+  const response = await data.json()
+  return response
+}
