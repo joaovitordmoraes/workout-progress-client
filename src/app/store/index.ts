@@ -1,15 +1,15 @@
 import { create } from 'zustand'
 
-export interface PaymentMethodState {
+export interface RoutinesState {
   updateRoutines: boolean
-  setUpdateRoutines: () => void
+  setUpdateRoutines: (update: boolean) => void
 }
 
-export const useRoutines = create<PaymentMethodState>((set) => {
+export const useRoutines = create<RoutinesState>((set) => {
   return {
     updateRoutines: false,
-    setUpdateRoutines: () => {
-      set({ updateRoutines: true })
+    setUpdateRoutines: (update) => {
+      set({ updateRoutines: update })
     },
   }
 })
