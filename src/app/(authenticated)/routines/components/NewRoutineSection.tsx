@@ -33,7 +33,7 @@ export function NewRoutineSection() {
 
       if (createTrainingRoutineRequest.success) {
         console.log('Rotina de treino criada com sucesso')
-        setUpdateRoutines()
+        setUpdateRoutines(false)
       }
     } catch (error) {
       console.log(error)
@@ -41,29 +41,25 @@ export function NewRoutineSection() {
   }
 
   return (
-    <>
-      <h2 className="text-2xl mb-8">Criar nova rotina de treino</h2>
-
-      <FormProvider {...createRoutineForm}>
-        <form
-          className="flex flex-col gap-2 w-96"
-          onSubmit={createRoutineForm.handleSubmit(onSubmit)}
+    <FormProvider {...createRoutineForm}>
+      <form
+        className="flex flex-col gap-2"
+        onSubmit={createRoutineForm.handleSubmit(onSubmit)}
+      >
+        <input
+          className="border rounded-sm p-2"
+          type="text"
+          placeholder="Nome da rotina de treino"
+          {...createRoutineForm.register('name')}
+        />
+        {createRoutineForm.formState.errors.name?.message}
+        <button
+          className="border rounded-sm py-2 hover:bg-zinc-50"
+          type="submit"
         >
-          <input
-            className="border rounded-sm p-2"
-            type="text"
-            placeholder="Nome da rotina de treino"
-            {...createRoutineForm.register('name')}
-          />
-          {createRoutineForm.formState.errors.name?.message}
-          <button
-            className="border rounded-sm py-2 hover:bg-zinc-50"
-            type="submit"
-          >
-            Criar
-          </button>
-        </form>
-      </FormProvider>
-    </>
+          Criar
+        </button>
+      </form>
+    </FormProvider>
   )
 }

@@ -1,10 +1,13 @@
 'use client'
 
-import { RoutineItem } from '@/app/components/RoutineItem'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { getAllTrainingRoutines } from '@/app/services/training-routine/client'
 import { useRoutines } from '@/app/store'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+
+import { EmptyState } from '@/app/components/EmptyState'
+import { RoutineItem } from '@/app/components/RoutineItem'
+import { NewRoutineModal } from './NewRoutineModal'
 
 type trainingProps = {
   id: string
@@ -20,13 +23,18 @@ type RoutineProps = {
 }
 
 export function RoutinesList() {
-  const { updateRoutines } = useRoutines((store) => {
+  const { updateRoutines, setuUpdateRoutines } = useRoutines((store) => {
     return {
       updateRoutines: store.updateRoutines,
+      setuUpdateRoutines: store.setUpdateRoutines,
     }
   })
   const [routines, setRoutines] = useState<RoutineProps[]>()
   const router = useRouter()
+
+  const showModal = () => {
+    setuUpdateRoutines(true)
+  }
 
   useEffect(() => {
     const loadRoutines = async () => {
@@ -43,8 +51,9 @@ export function RoutinesList() {
 
   return (
     <>
+      <NewRoutineModal />
       {routines && routines.length > 0 ? (
-        <>
+        <section className="grid grid-cols-3 gap-6">
           {routines?.map((item) => (
             <RoutineItem
               key={item.name}
@@ -53,9 +62,14 @@ export function RoutinesList() {
               onClick={() => router.replace(`/routines/${item.id}`)}
             />
           ))}
-        </>
+        </section>
       ) : (
-        <p>Nenhuma Rotina de treino encontrada</p>
+        <section className="py-4">
+          <EmptyState buttonLabel="Nova Rotina" onClick={showModal}>
+            Nenhuma rotina de treino encontrada. <br />
+            Crie sua primeira rotina.
+          </EmptyState>
+        </section>
       )}
     </>
   )
