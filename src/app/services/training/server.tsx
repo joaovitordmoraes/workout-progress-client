@@ -1,20 +1,16 @@
+import { nextAuthOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 import { api } from '../api'
-import { nextAuthOptions } from '@/app/api/auth/[...nextauth]/route'
 
-export async function getAllTrainingRoutinesServer() {
+export async function getTrainingExercises(id: string) {
   const session = await getServerSession(nextAuthOptions)
 
   const data = await api({
-    path: '/routine',
+    path: `/trainings/${id}`,
     init: {
       method: 'GET',
-      cache: 'no-store',
       headers: {
         Authorization: `Bearer ${session?.user}`,
-      },
-      next: {
-        revalidate: 10,
       },
     },
   })
