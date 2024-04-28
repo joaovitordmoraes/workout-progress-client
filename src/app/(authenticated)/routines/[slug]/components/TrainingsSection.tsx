@@ -4,11 +4,11 @@ import {
   Routines,
   TrainingExercises,
 } from '@/app/services/training-routine/types'
-import WorkoutSection from './WorkoutSection'
 import { useEffect, useState } from 'react'
 import { getAllTrainingRoutines } from '@/app/services/training-routine/client'
 import { useRoutines } from '@/app/store'
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { TrainingCard } from '@/app/components/TrainingCard'
 
 type TrainingsSectionProps = {
   routineId: string
@@ -25,6 +25,8 @@ export function TrainingsSection({ routineId }: TrainingsSectionProps) {
       updateTrainings: store.updateTrainings,
     }
   })
+
+  const router = useRouter()
 
   useEffect(() => {
     const loadingRoutines = async () => {
@@ -50,10 +52,11 @@ export function TrainingsSection({ routineId }: TrainingsSectionProps) {
       {haveTrainings &&
         trainingRoutine.trainings.map((training) => {
           return (
-            <WorkoutSection
+            <TrainingCard
               key={training.name}
               name={training.name}
-              trainingId={training.id}
+              onClick={() => router.push(`/training/${training.id}`)}
+              onRemove={() => console.log('remove')}
             />
           )
         })}
