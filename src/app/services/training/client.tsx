@@ -102,3 +102,20 @@ export async function createExercise({
 
   return response
 }
+
+export async function deleteExercise(id: string) {
+  const session = await getSession()
+
+  const data = await api({
+    path: `/exercise/${id}`,
+    init: {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${session?.user}`,
+      },
+    },
+  })
+
+  const response = await data.json()
+  return response
+}
