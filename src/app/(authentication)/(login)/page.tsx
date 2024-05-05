@@ -1,6 +1,7 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { SyntheticEvent, useState } from 'react'
 
@@ -55,6 +56,10 @@ export default function Home() {
           Log in
         </button>
       </form>
+
+      <div className="mt-6">
+        <Link href="/sign-up">Criar Conta</Link>
+      </div>
     </main>
   )
 }
