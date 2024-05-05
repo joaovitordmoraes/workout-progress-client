@@ -5,6 +5,7 @@ export type Exercise = {
   series: number
   series_type: string
   reps: number
+  weight: number
   trainingsId?: string
   trainingRoutinesId?: string | null
 }
