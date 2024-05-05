@@ -40,7 +40,7 @@ export function WorkoutItem({
           </button>
         </div>
       </header>
-      <div className="flex gap-6">
+      <div className="flex flex-col lg:flex-row lg:gap-6">
         <div>
           <strong>Tipo de série:</strong> {series_type}
         </div>
