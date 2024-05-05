@@ -6,7 +6,7 @@ import {
   deleteRoutine,
   getAllTrainingRoutines,
 } from '@/app/services/training-routine/client'
-import { useRoutines } from '@/app/store'
+import { useRoutines } from '@/app/store/routine'
 
 import { EmptyState } from '@/app/components/EmptyState'
 import { RoutineItem } from '@/app/components/RoutineItem'

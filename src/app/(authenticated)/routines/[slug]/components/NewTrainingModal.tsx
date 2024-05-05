@@ -1,7 +1,7 @@
 'use client'
 
 import { Modal } from 'antd'
-import { useRoutines } from '@/app/store'
+import { useRoutines } from '@/app/store/routine'
 import { NewTrainingForm } from './NewTrainingForm'
 
 export function NewTrainingModal() {

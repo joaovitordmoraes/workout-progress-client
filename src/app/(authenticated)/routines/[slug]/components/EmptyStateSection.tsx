@@ -1,7 +1,7 @@
 'use client'
 
 import { EmptyState } from '@/app/components/EmptyState'
-import { useRoutines } from '@/app/store'
+import { useRoutines } from '@/app/store/routine'
 import { NewTrainingModal } from './NewTrainingModal'
 import { useEffect } from 'react'
 

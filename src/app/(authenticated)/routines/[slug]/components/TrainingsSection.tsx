@@ -6,7 +6,7 @@ import {
 } from '@/app/services/training-routine/types'
 import { useEffect, useState } from 'react'
 import { getAllTrainingRoutines } from '@/app/services/training-routine/client'
-import { useRoutines } from '@/app/store'
+import { useRoutines } from '@/app/store/routine'
 import { redirect, useRouter } from 'next/navigation'
 import { TrainingCard } from '@/app/components/TrainingCard'
 

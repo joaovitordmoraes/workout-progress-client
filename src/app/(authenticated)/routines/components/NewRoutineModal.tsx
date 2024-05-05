@@ -2,7 +2,7 @@
 
 import { Modal } from 'antd'
 import { NewRoutineSection } from './NewRoutineSection'
-import { useRoutines } from '@/app/store'
+import { useRoutines } from '@/app/store/routine'
 
 export function NewRoutineModal() {
   const { updateRoutines, setUpdateRoutines } = useRoutines((store) => {

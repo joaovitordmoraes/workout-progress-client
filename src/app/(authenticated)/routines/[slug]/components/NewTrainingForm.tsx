@@ -4,7 +4,7 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { createTraining } from '@/app/services/training/client'
-import { useRoutines } from '@/app/store'
+import { useRoutines } from '@/app/store/routine'
 
 type CreateTrainingFormProps = {
   name: string

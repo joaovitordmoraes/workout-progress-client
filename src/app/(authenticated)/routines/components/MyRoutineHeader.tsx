@@ -1,6 +1,6 @@
 'use client'
 
-import { useRoutines } from '@/app/store'
+import { useRoutines } from '@/app/store/routine'
 import { FiPlus } from 'react-icons/fi'
 import { NewRoutineModal } from './NewRoutineModal'
 
