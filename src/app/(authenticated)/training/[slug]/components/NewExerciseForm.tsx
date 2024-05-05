@@ -40,12 +40,15 @@ const createTrainingSchema = yup.object({
 })
 
 export function NewExerciseForm() {
-  const { trainingId, setUpdateTraining } = useTraining((store) => {
-    return {
-      trainingId: store.trainingId,
-      setUpdateTraining: store.setUpdateTraining,
-    }
-  })
+  const { trainingId, setUpdateTraining, setModalOpen } = useTraining(
+    (store) => {
+      return {
+        trainingId: store.trainingId,
+        setUpdateTraining: store.setUpdateTraining,
+        setModalOpen: store.setModalOpen,
+      }
+    },
+  )
 
   const createExerciseForm = useForm<CreateExerciseFormProps>({
     resolver: yupResolver(createTrainingSchema),
@@ -66,6 +69,7 @@ export function NewExerciseForm() {
       if (createExerciseRequest.success) {
         setUpdateTraining(true)
         createExerciseForm.reset()
+        setModalOpen(false)
       }
     } catch (error) {
       console.log(error)
