@@ -8,6 +8,16 @@ type CreateTrainingProps = {
   routineId: string
 }
 
+type CreateExerciseProps = {
+  name: string
+  description?: string
+  series: number
+  series_type: string
+  reps: number
+  weight: number
+  trainingId: string
+}
+
 export async function createTraining({ name, routineId }: CreateTrainingProps) {
   const session = await getSession()
 
@@ -48,5 +58,47 @@ export async function getTrainingExercises(id: string) {
   })
 
   const response = await data.json()
+  return response
+}
+
+export async function createExercise({
+  name,
+  description,
+  series_type,
+  series,
+  reps,
+  weight,
+  trainingId,
+}: CreateExerciseProps) {
+  const session = await getSession()
+
+  const body = JSON.stringify({
+    name,
+    description,
+    series_type,
+    series,
+    reps,
+    weight,
+    trainingId,
+  })
+
+  console.log(body)
+
+  const data = await api({
+    path: '/exercise',
+    init: {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${session?.user}`,
+      },
+      body,
+    },
+  })
+
+  const response = await data.json()
+
+  console.log(response)
+
   return response
 }
