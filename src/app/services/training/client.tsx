@@ -82,8 +82,6 @@ export async function createExercise({
     trainingId,
   })
 
-  console.log(body)
-
   const data = await api({
     path: '/exercise',
     init: {
@@ -97,8 +95,6 @@ export async function createExercise({
   })
 
   const response = await data.json()
-
-  console.log(response)
 
   return response
 }
