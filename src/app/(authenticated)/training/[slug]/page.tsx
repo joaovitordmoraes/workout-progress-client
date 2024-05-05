@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react'
 import { FiPlus } from 'react-icons/fi'
 import { NewExerciseModal } from './components/NewExerciseModal'
 import { useTraining } from '@/app/store/training'
+import { checkIn } from '@/app/services/checkin/client'
+import { useRouter } from 'next/navigation'
 
 type TrainingDetailProps = {
   params: {
@@ -21,6 +23,7 @@ export default function TrainingDetail({ params }: TrainingDetailProps) {
   const [trainingExercises, setTrainingExercises] = useState<Exercise[]>(
     [] as Exercise[],
   )
+  const router = useRouter()
 
   const { setTrainingId, updateTraining, setUpdateTraining, setModalOpen } =
     useTraining((store) => {
@@ -43,6 +46,8 @@ export default function TrainingDetail({ params }: TrainingDetailProps) {
     setTrainingId(params.slug)
 
     loadExercises()
+
+    setUpdateTraining(false)
   }, [params.slug, updateTraining])
 
   const handleExerciseDelete = async (id: string) => {
@@ -52,7 +57,18 @@ export default function TrainingDetail({ params }: TrainingDetailProps) {
       if (deleteRequest.success) {
         setUpdateTraining(true)
       }
-      console.log(deleteRequest)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleCheckIn = async () => {
+    try {
+      const createCheckIn = await checkIn()
+
+      if (createCheckIn.success) {
+        router.replace('/dashboard')
+      }
     } catch (error) {
       console.log(error)
     }
@@ -86,11 +102,19 @@ export default function TrainingDetail({ params }: TrainingDetailProps) {
                   series_type={exercise.series_type}
                   series={exercise.series}
                   reps={exercise.reps}
-                  weight={40}
+                  weight={exercise.weight}
                   onRemove={() => handleExerciseDelete(exercise.id)}
                 />
               )
             })}
+
+            <button
+              className="border rounded-sm py-2 hover:bg-zinc-50"
+              type="button"
+              onClick={() => handleCheckIn()}
+            >
+              Finalizar treino
+            </button>
           </>
         ) : (
           <p>Loading...</p>
