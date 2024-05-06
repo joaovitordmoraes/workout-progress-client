@@ -26,6 +26,7 @@ export function NewRoutineSection() {
   })
 
   const onSubmit: SubmitHandler<CreateRotineFormProps> = async (data) => {
+    alert('enviou form')
     try {
       const createTrainingRoutineRequest = await createTrainingRoutine(
         data.name,
