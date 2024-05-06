@@ -69,7 +69,7 @@ export function RoutinesList() {
     <>
       <NewRoutineModal />
       {routines && routines.length > 0 ? (
-        <section className="grid grid-cols-3 gap-6">
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {routines?.map((item) => (
             <RoutineItem
               key={item.name}
