@@ -13,9 +13,6 @@ export async function getAllTrainingRoutinesServer() {
       headers: {
         Authorization: `Bearer ${session?.user}`,
       },
-      next: {
-        revalidate: 10,
-      },
     },
   })
 
