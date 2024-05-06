@@ -31,8 +31,6 @@ export function NewRoutineSection() {
         data.name,
       )
 
-      alert(createTrainingRoutineRequest)
-
       if (createTrainingRoutineRequest.success) {
         setUpdateRoutines(false)
         createRoutineForm.reset()
