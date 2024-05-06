@@ -1,6 +1,6 @@
-import { nextAuthOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 import { api } from '../api'
+import { nextAuthOptions } from '@/app/api/auth/[...nextauth]/options'
 
 export async function getCheckIns() {
   const session = await getServerSession(nextAuthOptions)
