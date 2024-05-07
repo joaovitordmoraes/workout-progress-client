@@ -20,7 +20,7 @@ export default async function AuthenticatedLayout({
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-dashboard">
       <SidebarSection />
-      <main className="w-full lg:col-start-2 lg:w-full mt-20 lg:mt-0">
+      <main className="w-full lg:col-start-2 lg:w-full mt-20 lg:mt-0 mb-4 lg:mb-0">
         {children}
       </main>
     </div>
