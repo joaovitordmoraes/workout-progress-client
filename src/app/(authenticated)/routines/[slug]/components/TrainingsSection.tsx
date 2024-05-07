@@ -48,7 +48,7 @@ export function TrainingsSection({ routineId }: TrainingsSectionProps) {
   }, [updateTrainings])
 
   return (
-    <div className="grid grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {haveTrainings &&
         trainingRoutine.trainings.map((training) => {
           return (
