@@ -75,7 +75,7 @@ export default function TrainingDetail({ params }: TrainingDetailProps) {
   }
 
   return (
-    <section className="w-full h-screen flex flex-col p-10">
+    <section className="w-full flex flex-col p-10">
       <NewExerciseModal />
       <header className="flex justify-between border-b border-zinc-200 pb-8 mb-8">
         <h2 className="text-2xl font-bold uppercase">Treino A</h2>
