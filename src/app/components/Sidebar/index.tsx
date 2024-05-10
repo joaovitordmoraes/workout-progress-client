@@ -7,6 +7,7 @@ import { NavItem } from './MainNavigation/NavItem'
 import { LogoutButton } from './LogoutButton'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { tv } from 'tailwind-variants'
+import { useSidebar } from '@/app/store/sidebar'
 
 type SidebarProps = {
   name: string
@@ -45,24 +46,25 @@ export function Sidebar({ name, email, onLogout }: SidebarProps) {
     bottomNav,
     divider,
   } = sidebar()
+  const { isOpen, setIsOpen } = useSidebar()
 
   return (
-    <Collapsible.Root className={container()}>
+    <Collapsible.Root open={isOpen} className={container()}>
       <div className={menu()}>
         <Logo />
         <Collapsible.Trigger asChild className={floatMenuOpen()}>
-          <button>
+          <button onClick={() => setIsOpen(true)}>
             <Menu className={iconMenu()} />
           </button>
         </Collapsible.Trigger>
         <Collapsible.Trigger asChild className={floatMenuClose()}>
-          <button>
+          <button onClick={() => setIsOpen(false)}>
             <X className={iconMenu()} />
           </button>
         </Collapsible.Trigger>
       </div>
 
-      <Collapsible.Content forceMount className={menuContent()}>
+      <Collapsible.Content className={menuContent()}>
         <MainNavigation />
 
         <div className={bottomNav()}>

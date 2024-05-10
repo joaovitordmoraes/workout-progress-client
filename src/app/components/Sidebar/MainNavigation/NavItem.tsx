@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { tv } from 'tailwind-variants'
+import { useSidebar } from '@/app/store/sidebar'
 
 export type NavItemProps = {
   title: string
@@ -37,9 +38,10 @@ export function NavItem({
   state = 'default',
 }: NavItemProps) {
   const { container, iconStyle, text } = item({ state })
+  const { setIsOpen } = useSidebar()
 
   return (
-    <Link href={link} className={container()}>
+    <Link href={link} className={container()} onClick={() => setIsOpen(false)}>
       <Icon className={iconStyle()} />
       <span className={text()}>{title}</span>
     </Link>
