@@ -64,7 +64,7 @@ export function Sidebar({ name, email, onLogout }: SidebarProps) {
         </Collapsible.Trigger>
       </div>
 
-      <Collapsible.Content className={menuContent()}>
+      <Collapsible.Content forceMount className={menuContent()}>
         <MainNavigation />
 
         <div className={bottomNav()}>

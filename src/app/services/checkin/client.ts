@@ -11,10 +11,29 @@ export async function checkIn() {
       headers: {
         Authorization: `Bearer ${session?.user}`,
       },
+      cache: 'no-store',
     },
   })
 
   const response = await data.json()
 
+  return response
+}
+
+export async function getCheckIns() {
+  const session = await getSession()
+
+  const data = await api({
+    path: `/check-ins/metrics`,
+    init: {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${session?.user}`,
+      },
+      cache: 'no-store',
+    },
+  })
+
+  const response = await data.json()
   return response
 }
